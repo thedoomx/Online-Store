@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Editor.Models.StoreModel>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Manage stores</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create new store", "AdminCreateStore")
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Manage store", "StoresEdit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "StoresDetails", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "StoresDelete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

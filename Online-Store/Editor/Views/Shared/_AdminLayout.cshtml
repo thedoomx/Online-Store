@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div>
+        @if (Request.IsAuthenticated)
+        {
+            <strong>@Html.Encode(User.Identity.Name)</strong>
+            @Html.ActionLink("Log out", "LogOut", "User")
+        }
+        
+        @Html.ActionLink("Back to main page", "Index", "Admin")
+    </div>
+    <hr/>
+
+    @RenderBody()
+</body>
+</html>

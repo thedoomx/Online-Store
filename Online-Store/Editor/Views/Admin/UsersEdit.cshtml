@@ -1,0 +1,47 @@
+﻿@model Editor.Models.AdminUserModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UsersEdit</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <div>
+            <h4>User</h4>
+            <hr />
+            
+            <div>
+                @Html.LabelFor(model => model.Role)
+                <div>
+                    @Html.EditorFor(model => model.Role)
+                    @Html.ValidationMessageFor(model => model.Role)
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.Password)
+            @Html.HiddenFor(model => model.Email)
+            <div>
+                <div>
+                    <input type="submit" value="Save" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "ManageUsers")
+    </div>
+</body>
+</html>

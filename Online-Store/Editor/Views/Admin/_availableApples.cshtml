@@ -1,0 +1,42 @@
+﻿@model Editor.Models.StoreModel
+
+@if (ViewBag.list.Count != 0)
+{
+    <div>
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().TypeOfApple)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Quantity)
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.list)
+            {
+                <tr>
+                    <td>
+                        @item.TypeOfApple
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @Html.ActionLink("Add to store", "AddAppleToStore", new { id = item.Id, storeId = Model.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <div>No apples are currently available.</div>
+}

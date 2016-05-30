@@ -1,0 +1,40 @@
+﻿@model Editor.Models.AdminUserModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>User details</title>
+</head>
+<body>
+    <div>
+        <h4>User</h4>
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Role)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Role)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Change role", "UsersEdit", new { id = Model.UserId }) |
+        @Html.ActionLink("Back to List", "ManageUsers")
+    </p>
+</body>
+</html>

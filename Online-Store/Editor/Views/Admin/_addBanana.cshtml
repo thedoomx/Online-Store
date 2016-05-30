@@ -1,0 +1,43 @@
+﻿@model Editor.Models.BananaModel
+
+<div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <h4>Adding banana</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            <div>
+                @Html.LabelFor(model => model.TypeOfBanana)
+                <div>
+                    @Html.EditorFor(model => model.TypeOfBanana)
+                    @Html.ValidationMessageFor(model => model.TypeOfBanana)
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Price)
+                <div>
+                    @Html.EditorFor(model => model.Price)
+                    @Html.ValidationMessageFor(model => model.Price)
+                </div>
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Quantity)
+                <div>
+                    @Html.EditorFor(model => model.Quantity)
+                    @Html.ValidationMessageFor(model => model.Quantity)
+                </div>
+            </div>
+
+            <div>
+                <div>
+                    <input type="submit" value="Create" />
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,43 @@
+﻿@model Editor.Models.StoreModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create new store</title>
+</head>
+<body>
+    @using (Html.BeginForm()) 
+    {
+        @Html.AntiForgeryToken()
+        
+        <div>
+            <h4>Create new store</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            <div>
+                @Html.LabelFor(model => model.Name)
+                <div>
+                    @Html.EditorFor(model => model.Name)
+                    @Html.ValidationMessageFor(model => model.Name)
+                </div>
+            </div>
+    
+            <div>
+                <div>
+                    <input type="submit" value="Create" />
+                </div>
+            </div>
+        </div>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to stores", "ManageStores")
+    </div>
+</body>
+</html>

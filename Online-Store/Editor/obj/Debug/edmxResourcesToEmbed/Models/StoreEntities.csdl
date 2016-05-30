@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Library.StoreContextModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Apple">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfApple" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MemberBaskets" Relationship="Self.MemberBasketApples" FromRole="Apples" ToRole="MemberBaskets" />
+    <NavigationProperty Name="Stores" Relationship="Self.StoreApples" FromRole="Apples" ToRole="Stores" />
+  </EntityType>
+  <EntityType Name="Banana">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfBanana" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MemberBaskets" Relationship="Self.BananaMemberBaskets" FromRole="Bananas" ToRole="MemberBaskets" />
+    <NavigationProperty Name="Stores" Relationship="Self.StoreBananas" FromRole="Bananas" ToRole="Stores" />
+    <NavigationProperty Name="MemberBasketBananas" Relationship="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_Bananas_BananaId" FromRole="Banana" ToRole="MemberBasketBanana" />
+  </EntityType>
+  <EntityType Name="MemberBasket">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dbo_MemberBaskets_dbo_Users_Email" FromRole="MemberBaskets" ToRole="Users" />
+    <NavigationProperty Name="Bananas" Relationship="Self.BananaMemberBaskets" FromRole="MemberBaskets" ToRole="Bananas" />
+    <NavigationProperty Name="Apples" Relationship="Self.MemberBasketApples" FromRole="MemberBaskets" ToRole="Apples" />
+    <NavigationProperty Name="MemberBasketBananas" Relationship="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_MemberBaskets_MemberBasket_Email" FromRole="MemberBasket" ToRole="MemberBasketBanana" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Users" Relationship="Self.RoleUsers" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Apples" Relationship="Self.StoreApples" FromRole="Stores" ToRole="Apples" />
+    <NavigationProperty Name="Bananas" Relationship="Self.StoreBananas" FromRole="Stores" ToRole="Bananas" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="202" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MemberBasket" Relationship="Self.FK_dbo_MemberBaskets_dbo_Users_Email" FromRole="Users" ToRole="MemberBaskets" />
+    <NavigationProperty Name="Roles" Relationship="Self.RoleUsers" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK_dbo_MemberBaskets_dbo_Users_Email">
+    <End Role="Users" Type="Self.User" Multiplicity="1" />
+    <End Role="MemberBaskets" Type="Self.MemberBasket" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="MemberBaskets">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BananaMemberBaskets">
+    <End Role="Bananas" Type="Self.Banana" Multiplicity="*" />
+    <End Role="MemberBaskets" Type="Self.MemberBasket" Multiplicity="*" />
+  </Association>
+  <Association Name="MemberBasketApples">
+    <End Role="Apples" Type="Self.Apple" Multiplicity="*" />
+    <End Role="MemberBaskets" Type="Self.MemberBasket" Multiplicity="*" />
+  </Association>
+  <Association Name="RoleUsers">
+    <End Role="Roles" Type="Self.Role" Multiplicity="*" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <Association Name="StoreApples">
+    <End Role="Apples" Type="Self.Apple" Multiplicity="*" />
+    <End Role="Stores" Type="Self.Store" Multiplicity="*" />
+  </Association>
+  <Association Name="StoreBananas">
+    <End Role="Bananas" Type="Self.Banana" Multiplicity="*" />
+    <End Role="Stores" Type="Self.Store" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="StoreNewEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Apples" EntityType="Self.Apple" />
+    <EntitySet Name="Bananas" EntityType="Self.Banana" />
+    <EntitySet Name="MemberBaskets" EntityType="Self.MemberBasket" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Stores" EntityType="Self.Store" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_dbo_MemberBaskets_dbo_Users_Email" Association="Self.FK_dbo_MemberBaskets_dbo_Users_Email">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MemberBaskets" EntitySet="MemberBaskets" />
+    </AssociationSet>
+    <AssociationSet Name="BananaMemberBaskets" Association="Self.BananaMemberBaskets">
+      <End Role="Bananas" EntitySet="Bananas" />
+      <End Role="MemberBaskets" EntitySet="MemberBaskets" />
+    </AssociationSet>
+    <AssociationSet Name="MemberBasketApples" Association="Self.MemberBasketApples">
+      <End Role="Apples" EntitySet="Apples" />
+      <End Role="MemberBaskets" EntitySet="MemberBaskets" />
+    </AssociationSet>
+    <AssociationSet Name="RoleUsers" Association="Self.RoleUsers">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="StoreApples" Association="Self.StoreApples">
+      <End Role="Apples" EntitySet="Apples" />
+      <End Role="Stores" EntitySet="Stores" />
+    </AssociationSet>
+    <AssociationSet Name="StoreBananas" Association="Self.StoreBananas">
+      <End Role="Bananas" EntitySet="Bananas" />
+      <End Role="Stores" EntitySet="Stores" />
+    </AssociationSet>
+    <EntitySet Name="MemberBasketBananas" EntityType="Library.StoreContextModel.MemberBasketBanana" />
+    <AssociationSet Name="FK_dbo_MemberBasketBananas_dbo_Bananas_BananaId" Association="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_Bananas_BananaId">
+      <End Role="Banana" EntitySet="Bananas" />
+      <End Role="MemberBasketBanana" EntitySet="MemberBasketBananas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_MemberBasketBananas_dbo_MemberBaskets_MemberBasket_Email" Association="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_MemberBaskets_MemberBasket_Email">
+      <End Role="MemberBasket" EntitySet="MemberBaskets" />
+      <End Role="MemberBasketBanana" EntitySet="MemberBasketBananas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="MemberBasketBanana">
+    <Key>
+      <PropertyRef Name="BananaId" />
+      <PropertyRef Name="MemberBasketEmail" />
+    </Key>
+    <Property Name="BananaId" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="MemberBasket_Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="MemberBasketEmail" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Banana" Relationship="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_Bananas_BananaId" FromRole="MemberBasketBanana" ToRole="Banana" />
+    <NavigationProperty Name="MemberBasket" Relationship="Library.StoreContextModel.FK_dbo_MemberBasketBananas_dbo_MemberBaskets_MemberBasket_Email" FromRole="MemberBasketBanana" ToRole="MemberBasket" />
+  </EntityType>
+  <Association Name="FK_dbo_MemberBasketBananas_dbo_Bananas_BananaId">
+    <End Type="Library.StoreContextModel.Banana" Role="Banana" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="Library.StoreContextModel.MemberBasketBanana" Role="MemberBasketBanana" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banana">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MemberBasketBanana">
+        <PropertyRef Name="BananaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_MemberBasketBananas_dbo_MemberBaskets_MemberBasket_Email">
+    <End Type="Library.StoreContextModel.MemberBasket" Role="MemberBasket" Multiplicity="0..1" />
+    <End Type="Library.StoreContextModel.MemberBasketBanana" Role="MemberBasketBanana" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberBasket">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="MemberBasketBanana">
+        <PropertyRef Name="MemberBasket_Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

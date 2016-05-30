@@ -1,0 +1,26 @@
+﻿    @model Editor.Models.BananaModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Banana added to basket confirmed</title>
+</head>
+<body>
+    <div>
+        <p>
+            You have successfully added @Html.DisplayFor(model => model.Quantity)
+             @Html.DisplayFor(model => model.TypeOfBanana) bananas in your basket!
+        </p>
+
+    </div>
+    <p>
+        @Html.ActionLink("Back to store", "ShowStoreItems", new { id = ViewBag.storeId })
+    </p>
+</body>
+</html>

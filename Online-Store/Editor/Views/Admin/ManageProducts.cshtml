@@ -1,0 +1,59 @@
+﻿@model Editor.Models.ProductsModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Manage products</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Add new product", "AdminAddProduct")
+    </p>
+
+    <fieldset>
+        <legend>All apples</legend>
+        <table>
+            @foreach (var item in Model.Apples)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeOfApple)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit apple details", "AppleEdit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "AppleDetails", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "DeleteApple", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend>All bananas</legend>
+        <table>
+            @foreach (var item in Model.Bananas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TypeOfBanana)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit banana details", "BananaEdit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "BananaDetails", new { id = item.Id  }) |
+                        @Html.ActionLink("Delete", "DeleteBanana", new { id = item.Id  })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </fieldset>
+</body>
+</html>

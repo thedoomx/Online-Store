@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LibraryStoreContextModelStoreContainer" CdmEntityContainer="StoreNewEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Apples">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.Apple">
+        <MappingFragment StoreEntitySet="Apples">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeOfApple" ColumnName="TypeOfApple" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bananas">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.Banana">
+        <MappingFragment StoreEntitySet="Bananas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="TypeOfBanana" ColumnName="TypeOfBanana" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberBaskets">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.MemberBasket">
+        <MappingFragment StoreEntitySet="MemberBaskets">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stores">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.Store">
+        <MappingFragment StoreEntitySet="Stores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="MemberBasketApples" TypeName="Library.StoreContextModel.MemberBasketApples" StoreEntitySet="MemberBasketApples">
+      <EndProperty Name="MemberBaskets">
+        <ScalarProperty Name="Email" ColumnName="MemberBasket_Email" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="RoleUsers" TypeName="Library.StoreContextModel.RoleUsers" StoreEntitySet="RoleUsers">
+      <EndProperty Name="Roles">
+        <ScalarProperty Name="Id" ColumnName="Role_Id" />
+      </EndProperty>
+      <EndProperty Name="Users">
+        <ScalarProperty Name="Email" ColumnName="User_Email" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StoreApples" TypeName="Library.StoreContextModel.StoreApples" StoreEntitySet="StoreApples">
+      <EndProperty Name="Apples">
+        <ScalarProperty Name="Id" ColumnName="Apple_Id" />
+      </EndProperty>
+      <EndProperty Name="Stores">
+        <ScalarProperty Name="Id" ColumnName="Store_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StoreBananas" TypeName="Library.StoreContextModel.StoreBananas" StoreEntitySet="StoreBananas">
+      <EndProperty Name="Bananas">
+        <ScalarProperty Name="Id" ColumnName="Banana_Id" />
+      </EndProperty>
+      <EndProperty Name="Stores">
+        <ScalarProperty Name="Id" ColumnName="Store_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="MemberBasketBananas">
+      <EntityTypeMapping TypeName="Library.StoreContextModel.MemberBasketBanana">
+        <MappingFragment StoreEntitySet="MemberBasketBananas">
+          <ScalarProperty Name="MemberBasketEmail" ColumnName="MemberBasketEmail" />
+          <ScalarProperty Name="MemberBasket_Email" ColumnName="MemberBasket_Email" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="BananaId" ColumnName="BananaId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

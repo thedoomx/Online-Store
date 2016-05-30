@@ -1,0 +1,43 @@
+﻿@model Editor.Models.StoreModel
+
+@if (ViewBag.list.Count != 0)
+{
+    <div>
+        <table>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Bananas.FirstOrDefault().TypeOfBanana)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Bananas.FirstOrDefault().Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products.Bananas.FirstOrDefault().Quantity)
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.list)
+            {
+            <tr>
+                <td>
+                    @item.TypeOfBanana
+                </td>
+                <td>
+                    @item.Price
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @Html.ActionLink("Add to store", "AddBananaToStore", new { id = item.Id, storeId = Model.Id })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    <div>No bananas are currently available.</div>
+}
+

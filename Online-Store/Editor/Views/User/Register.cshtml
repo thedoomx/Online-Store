@@ -1,0 +1,35 @@
+﻿@model Editor.Models.UserModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(true, "Create user failed, check the fields!")
+            <fieldset>
+                <legend>
+                    Create user
+                </legend>
+                @Html.LabelFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email)
+                @Html.ValidationMessageFor(model => model.Email)
+
+                @Html.LabelFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password)
+                @Html.ValidationMessageFor(model => model.Password)
+
+                <input type="submit" value="Create user" />
+            </fieldset>
+        }
+    </div>
+</body>
+</html>

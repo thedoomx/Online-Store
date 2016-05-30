@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add product</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    
+</head>
+<body>
+    <div>
+        <a href='javascript:addApple();'>Add new apple</a>
+
+        <script type="text/javascript">
+            function addApple() {
+                $('#divProduct').load("@Url.Action("AdminAddApple", "Admin")");
+            }
+        </script>
+
+        <a href='javascript:addBanana();'>Add new banana</a>
+
+        <script type="text/javascript">
+            function addBanana() {
+                $('#divProduct').load("@Url.Action("AdminAddBanana", "Admin")");
+            }
+        </script>
+
+        <div id="divProduct"></div>
+        
+    </div>
+</body>
+</html>

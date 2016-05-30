@@ -1,0 +1,120 @@
+﻿@model Editor.Models.StoreModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Store details</title>
+</head>
+<body>
+    <div>
+        <h4>Store</h4>
+        <hr />
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+        </dl>
+    </div>
+    <div>
+        <fieldset>
+            <legend>Apples in store</legend>
+            @if (Model.Products.Apples.Count != 0)
+            {
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().TypeOfApple)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Price)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Quantity)
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.Products.Apples)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TypeOfApple)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details for apple", "AppleDetails", new { id = item.Id })
+                        </td>
+                    </tr>
+                    }
+
+                </table>
+            }
+            else
+            {
+                <div>There are currently no apples in the store</div>
+            }
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Bananas in store</legend>
+            @if (Model.Products.Bananas.Count != 0)
+            {
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().TypeOfApple)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Price)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Products.Apples.FirstOrDefault().Quantity)
+                        </td>
+                    </tr>
+                    @foreach (var item in Model.Products.Bananas)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TypeOfBanana)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details for banana", "BananaDetails", new { id = item.Id })
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            }
+            else
+            {
+                <div>There are currently no bananas in the store</div>
+            }
+
+        </fieldset>
+    </div>
+    <p>
+        @Html.ActionLink("Back to stores", "ManageStores")
+    </p>
+</body>
+</html>

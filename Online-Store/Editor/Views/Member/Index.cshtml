@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome!</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+    <div>
+        @if (Request.IsAuthenticated)
+        {
+            <strong>@Html.Encode(User.Identity.Name)</strong>
+            <span> | </span>
+            @Html.ActionLink("Log out", "LogOut", "User")
+            <span> | </span>
+            @Html.ActionLink("Change password", "ChangePassword", "User")
+            <span> | </span>
+            @Html.ActionLink("Check basket", "InspectBasket", "Member")
+        }
+
+        <hr />
+    </div>
+    <div>
+        <div>
+            <a href='javascript:showStores();'>Show stores</a>
+
+            <script type="text/javascript">
+                function showStores() {
+                    $('#divStores').load("@Url.Action("ShowAllStores", "Member")");
+                }
+            </script>
+        </div>
+        <div id="divStores"></div>
+    </div>
+</body>
+</html>

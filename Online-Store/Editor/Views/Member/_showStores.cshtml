@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Editor.Models.StoreModel>
+
+<table>
+   
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Check store products", "ShowStoreItems", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

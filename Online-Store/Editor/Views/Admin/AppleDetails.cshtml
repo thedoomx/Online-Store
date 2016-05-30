@@ -1,0 +1,48 @@
+﻿@model Editor.Models.AppleModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Apple details</title>
+</head>
+<body>
+    <div>
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.TypeOfApple)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TypeOfApple)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Quantity)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "AppleEdit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to products", "ManageProducts")
+    </p>
+</body>
+</html>

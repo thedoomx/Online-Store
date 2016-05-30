@@ -1,0 +1,73 @@
+﻿@model Editor.Models.MemberBasket
+
+@{
+    Layout = null;
+}
+
+@{ 
+    decimal totalCost = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Your basket</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>
+                    Product
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Quantity
+                </th>
+            </tr>
+
+            @foreach (var item in ViewBag.items)
+            {
+                <tr>
+                    <td>
+                        @item.TypeOfItem
+                    </td>
+                    <td>
+                        @item.Price
+                        @{ 
+                            totalCost += item.Price * item.Quantity;
+                        }
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    @if (item.BananaOrApple.Equals("apple"))
+                    {
+                        <td>
+                            @Html.ActionLink("Remove", "RemoveAppleFromBasket", new { id = item.Id })
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.ActionLink("Remove", "RemoveBananaFromBasket", new { id = item.Id })
+                        </td>
+                    }
+
+                </tr>
+            }
+
+            
+        </table>
+        
+    </div>
+    <p>
+        Total cost : @totalCost
+        @Html.ActionLink("Order", "Order", new { id = Model.Email })
+    </p>
+</body>
+</html>

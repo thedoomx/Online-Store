@@ -1,0 +1,67 @@
+﻿@model Editor.Models.AppleModel
+
+@{
+    Layout = null;
+
+}
+
+@{
+    TempData["storeId"] = ViewBag.storeId;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Buy apple</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+    <div id="addedItem"></div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.Id)
+
+            <div>
+                @Html.LabelFor(model => model.TypeOfApple)
+                <span>: </span>
+                @Html.DisplayFor(model => model.TypeOfApple)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Price)
+                <span>: </span>
+                @Html.DisplayFor(model => model.Price)
+            </div>
+
+            <div>
+                @Html.LabelFor(model => model.Quantity)
+                <div>
+                    @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { min = 1, max = Model.Quantity } })
+                    @Html.ValidationMessageFor(model => model.Quantity)
+                </div>
+            </div>
+
+
+
+            <div>
+                <div>
+                    <input type="submit" value="Add to basket">
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to store", "ShowStoreItems", new { id = ViewBag.storeId })
+    </div>
+</body>
+</html>

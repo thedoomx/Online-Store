@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin page</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+</head>
+<body>
+    <div>
+        <strong>@Html.Encode(User.Identity.Name)</strong>
+        @Html.ActionLink("Log out", "LogOut", "User")
+    </div>
+    <div>
+        <h3>Welcome to admin management page</h3>
+        <hr />
+    </div>
+    <div>
+        @Html.ActionLink("Manage users", "ManageUsers", new { id = "userManagement" })
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#userManagement").click(function () {
+                alert("Working okay");
+            });
+        });
+    </script>
+
+    <div>
+        @Html.ActionLink("Manage stores", "ManageStores")
+    </div>
+    <div>
+        @Html.ActionLink("Manage products", "ManageProducts")
+    </div>
+
+</body>
+</html>
