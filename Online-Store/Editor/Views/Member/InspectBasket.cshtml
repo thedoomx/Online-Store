@@ -4,7 +4,7 @@
     Layout = null;
 }
 
-@{ 
+@{
     decimal totalCost = 0;
 }
 
@@ -14,8 +14,21 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Your basket</title>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
 </head>
 <body>
+    <div>
+        <strong>@Html.Encode(User.Identity.Name)</strong>
+        <span> | </span>
+        @Html.ActionLink("Log out", "LogOut", "User")
+        <span> | </span>
+        @Html.ActionLink("Change password", "ChangePassword", "User")
+        <span> | </span>
+        @Html.ActionLink("Back to main page", "Index", "Member")
+
+        <hr />
+    </div>
     <div>
         <table>
             <tr>
@@ -38,7 +51,7 @@
                     </td>
                     <td>
                         @item.Price
-                        @{ 
+                        @{
                             totalCost += item.Price * item.Quantity;
                         }
                     </td>
@@ -48,22 +61,24 @@
                     @if (item.BananaOrApple.Equals("apple"))
                     {
                         <td>
-                            @Html.ActionLink("Remove", "RemoveAppleFromBasket", new { id = item.Id })
+                            @Html.ActionLink("Remove", "RemoveAppleFromBasket", new { id = item.Id },
+                           new { onclick = "return confirm('Are you sure you wish to remove this apple from the basket?')" })
                         </td>
                     }
                     else
                     {
                         <td>
-                            @Html.ActionLink("Remove", "RemoveBananaFromBasket", new { id = item.Id })
+                            @Html.ActionLink("Remove", "RemoveBananaFromBasket", new { id = item.Id },
+                           new { onclick = "return confirm('Are you sure you wish to remove this banana from the basket?');" })
                         </td>
                     }
 
                 </tr>
-            }
+             }
 
-            
+
         </table>
-        
+
     </div>
     <p>
         Total cost : @totalCost

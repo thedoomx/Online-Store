@@ -1,7 +1,7 @@
 ﻿@model Editor.Models.AppleModel
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -14,7 +14,8 @@
 <body>
     <div>
         <p>
-            You have successfully added @Html.DisplayFor(model => model.Quantity) @Html.DisplayFor(model => model.TypeOfApple) apples in your basket!
+            You have successfully added @Html.DisplayFor(model => model.Quantity) 
+            @Html.DisplayFor(model => model.TypeOfApple) apples in your basket!
         </p>
         
     </div>

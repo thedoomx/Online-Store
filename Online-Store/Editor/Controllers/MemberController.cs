@@ -205,5 +205,19 @@ namespace Editor.Controllers
 
             return View(basket);
         }
+
+        public ActionResult RemoveAppleFromBasket(int id)
+        {
+            repo.RemoveAppleFromBasketAndRestoreToStore(id, User.Identity.Name);
+
+            return RedirectToAction("InspectBasket");
+        }
+
+        public ActionResult RemoveBananaFromBasket(int id)
+        {
+            repo.RemoveBananaFromBasketAndRestoreToStore(id, User.Identity.Name);
+
+            return RedirectToAction("InspectBasket");
+        }
     }
 }

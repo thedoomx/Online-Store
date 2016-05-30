@@ -10,11 +10,15 @@
         @if (Request.IsAuthenticated)
         {
             <strong>@Html.Encode(User.Identity.Name)</strong>
+            <span> | </span>
             @Html.ActionLink("Log out", "LogOut", "User")
+            <span> | </span>
             @Html.ActionLink("Change password", "ChangePassword", "User")
-        }
+            <span> | </span>
+            @Html.ActionLink("Check basket", "InspectBasket", "Member")
 
-        @Html.ActionLink("Back to main page", "Index", "Admin")
+            <hr />
+        }
     </div>
     <hr />
 

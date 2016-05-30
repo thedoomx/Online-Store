@@ -13,6 +13,19 @@
 </head>
 <body>
     <div>
+        <strong>@Html.Encode(User.Identity.Name)</strong>
+        <span> | </span>
+        @Html.ActionLink("Log out", "LogOut", "User")
+        <span> | </span>
+        @Html.ActionLink("Change password", "ChangePassword", "User")
+        <span> | </span>
+        @Html.ActionLink("Check basket", "InspectBasket", "Member")
+        <span> | </span>
+        @Html.ActionLink("Back to main page", "Index", "Member")
+
+        <hr />
+    </div>
+    <div>
         <h4>Store</h4>
         <hr />
         <dl>

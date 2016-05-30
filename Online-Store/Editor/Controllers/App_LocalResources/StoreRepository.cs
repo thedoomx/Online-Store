@@ -283,7 +283,7 @@ namespace Editor.Controllers
 
         public List<MemberBasketApple> GetApplesInBasket(string email)
         {
-            
+
             return context.MemberBasketApples.Where(mba => mba.Email.Equals(email)).ToList();
         }
 
@@ -291,6 +291,32 @@ namespace Editor.Controllers
         {
 
             return context.MemberBasketBananas.Where(mbb => mbb.Email.Equals(email)).ToList();
+        }
+
+        public void RemoveAppleFromBasketAndRestoreToStore(int appleId, string userEmail)
+        {
+            MemberBasketApple mba = context.MemberBasketApples.FirstOrDefault
+                                    (m => m.AppleId.Equals(appleId) && m.Email.Equals(userEmail));
+
+            var apple = context.Apples.FirstOrDefault(a => a.Id.Equals(appleId));
+
+            apple.Quantity += mba.Quantity;
+
+            context.MemberBasketApples.Remove(mba);
+            context.SaveChanges();
+        }
+
+        public void RemoveBananaFromBasketAndRestoreToStore(int bananaId, string userEmail)
+        {
+            MemberBasketBanana mbb = context.MemberBasketBananas.FirstOrDefault
+                                    (m => m.BananaId.Equals(bananaId) && m.Email.Equals(userEmail));
+
+            var banana = context.Bananas.FirstOrDefault(b => b.Id.Equals(bananaId));
+
+            banana.Quantity += mbb.Quantity;
+
+            context.MemberBasketBananas.Remove(mbb);
+            context.SaveChanges();
         }
     }
 }
